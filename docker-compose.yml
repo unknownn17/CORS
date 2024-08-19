@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  go:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 92-dars
+    image: 92-dars
+    ports:
+      - "9000:8080"
+      - "9001:8081"
+    depends_on:
+    - "redis"
+    networks:
+      - mynetwork
+  
+  redis:
+    container_name: redis_container17
+    image: redis:latest
+    ports:
+      - "6378:6379"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  db-data1:
